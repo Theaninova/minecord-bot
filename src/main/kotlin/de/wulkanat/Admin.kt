@@ -1,10 +1,7 @@
 package de.wulkanat
 
-import de.wulkanat.discordui.ColorEmoji
-import de.wulkanat.discordui.Emoji
 import de.wulkanat.extensions.embed
 import de.wulkanat.files.Config
-import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.entities.User
@@ -31,7 +28,8 @@ object Admin {
             embed {
                 title = msg
                 color = Color.WHITE
-            }, msg
+            },
+            msg
         )
     }
 
@@ -40,7 +38,8 @@ object Admin {
             embed {
                 title = msg
                 color = Color.WHITE
-            }, msg
+            },
+            msg
         )
     }
 
@@ -58,8 +57,8 @@ object Admin {
                         iconUrl = author.avatarUrl
                     }
                 }
-
-            }, "$msg\n\n${error}"
+            },
+            "$msg\n\n$error"
         )
     }
 
@@ -69,16 +68,17 @@ object Admin {
                 title = msg
                 description = error.message
                 color = Color.RED
-            }, "$msg\n\n${error.message}"
+            },
+            "$msg\n\n${error.message}"
         )
     }
 
     fun warning(msg: String) {
         sendDevMessage(
-            EmbedBuilder()
-                .setTitle(msg)
-                .setColor(Color.YELLOW)
-                .build(),
+            embed {
+                title = msg
+                color = Color.YELLOW
+            },
             msg
         )
     }
@@ -86,26 +86,11 @@ object Admin {
     fun info() {
         sendDevMessage(
             embed {
-                title = "Watching games"
+                title = "Server Status"
                 color = Color.GREEN
-
-                fields {
-                    for (emote in Emoji.values()) {
-                        field {
-                            title = emote.unicodeEmote
-                            description = emote.purpose
-                        }
-                    }
-
-                    for (emote in ColorEmoji.values()) {
-                        field {
-                            title = emote.amongUsName
-                            description = emote.stringRepresentation()
-                            inline = true
-                        }
-                    }
-                }
-            }, "Wow, such empty."
+                description = "Running"
+            },
+            "Wow, such empty."
         )
     }
 
@@ -114,7 +99,8 @@ object Admin {
             embed {
                 title = "Joined Servers"
                 description = jda?.guilds?.joinToString("\n") { "${it.name} (${it.memberCount} Members)" }
-            }, "Joined ${jda?.guilds?.size} servers"
+            },
+            "Joined ${jda?.guilds?.size} servers"
         )
     }
 

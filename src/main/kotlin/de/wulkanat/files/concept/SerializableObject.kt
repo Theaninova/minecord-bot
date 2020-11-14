@@ -1,7 +1,6 @@
 package de.wulkanat.files.concept
 
 import de.wulkanat.extensions.ensureExists
-import de.wulkanat.files.Config
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import java.io.File

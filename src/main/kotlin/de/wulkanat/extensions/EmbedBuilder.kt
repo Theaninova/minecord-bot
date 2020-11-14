@@ -122,6 +122,5 @@ class EmbedBuildKt {
     }
 
     fun fields(init: Fields.() -> Unit) {
-
     }
 }

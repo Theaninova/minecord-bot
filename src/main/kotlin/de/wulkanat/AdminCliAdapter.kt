@@ -4,7 +4,6 @@ import de.wulkanat.cli.Cli
 import de.wulkanat.cli.discordUsageEmbed
 import de.wulkanat.cli.makeCli
 import de.wulkanat.extensions.isBotAdmin
-import de.wulkanat.extensions.queueSelfDestruct
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import kotlin.system.exitProcess
@@ -20,7 +19,8 @@ class AdminCliAdapter : ListenerAdapter() {
         if (!event.author.isBotAdmin()) return
         val msg = event.message.contentRaw
 
-        cli.parse(msg, event,
+        cli.parse(
+            msg, event,
             commandMisuse = { command, message ->
                 event.message.channel.sendMessage(command.discordUsageEmbed(message)).queue()
             },
